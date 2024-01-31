@@ -18,8 +18,10 @@
             </p> 
             <template v-else>
                 <li v-for="result in results" :key="result.id"
-                class="py-2 cursor-pointer">
+                class="py-2 cursor-pointer"
+                @click="previewCity(result)">
                 {{ result.place_name }}
+                
                 </li>
             </template>
         </ul>
@@ -30,6 +32,7 @@
 
 <script>
 import axios  from 'axios'
+import {useRouter} from "vue-router";
     export default {
         data(){
             return{
@@ -41,6 +44,7 @@ import axios  from 'axios'
             }
         },
         methods: {
+            //fetch data from endpoint 
             getData(){
                 this.queryTimeout = setTimeout(async()=>{
                 if(this.searchQuery != ""){
@@ -60,6 +64,18 @@ import axios  from 'axios'
                         return;
                     }
                 },300);
+            },
+            previewCity(result){
+                //console.log(result);///this will log the result from the api..when clicked from the li tag
+                const [city , state] = result.place_name.split(",");
+                //console.log(city,state);//to check if the values are gotten from the array
+                useRouter().push({
+                    name:cityView,
+                    params:{state:state, city: city},//setting the params from the url to value gotten from result
+                    query:{
+                        lat: '',
+                    }
+                })
             }
             
         },    
