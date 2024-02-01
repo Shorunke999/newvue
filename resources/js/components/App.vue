@@ -1,8 +1,8 @@
 <template>
     <div class="">
-        <!--<navComponent/>
-        <HomeView />-->
-        <Authentication />
+        <navComponent/>
+        <HomeView />
+        <!--<Authentication />-->
     </div>
   
 </template>

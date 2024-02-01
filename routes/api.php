@@ -15,7 +15,8 @@ use App\Http\Controllers\Api\apiController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function(){
+    
 });
-Route::get('/url',[apiController::class,'apiFunction']);
+Route::get('/search/{info}',[apiController::class,'searchLocation'])->name('search');
+Route::post('/register',[apiController::class,'oneTimeRegister']);

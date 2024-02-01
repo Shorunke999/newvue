@@ -12,7 +12,7 @@ const router = createRouter({
         component: navComponent,
     },
     {
-        path:"/weather/:state/:city",
+        path:"/weather",
         name:"cityView",
         component: HomeView,
     }

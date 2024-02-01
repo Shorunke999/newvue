@@ -39,7 +39,7 @@ import {useRouter} from "vue-router";
                 searchQuery:"",
                 queryTimeout: null,
                 apiKey:"",
-                results:null,
+                results:"",
                 error_v : false,
             }
         },
@@ -49,17 +49,18 @@ import {useRouter} from "vue-router";
                 this.queryTimeout = setTimeout(async()=>{
                 if(this.searchQuery != ""){
                     try{
-                         await axios.get(`http..url/$(searchQuery).json?access_token=$(apiKey)&types=place`)
-                        .then(
-                        (response)=>{
-                        this.results = response.data.features;
+                        const info = this.searchQuery;
+                        await axios.get('api/search/${info}')
+                        .then((response)=>{
+                        //this.results = response.data.data;
+                        console.log(response);
                         return;
                         });
-                    }catch{
-                        this.error = true;
+                    }catch(error){
+                        this.error_v = true;
+                        console.log(error);
                     }
-                   
-                    }else{
+                }else{
                         this.results = null;
                         return;
                     }
