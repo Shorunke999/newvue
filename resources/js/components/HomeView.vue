@@ -1,26 +1,23 @@
 <template>
     <main class="container text-white">
-        <div class="pt-4 mb-8 relative ">
+        <div class="pt-4 mb-0 relative ">
             <input type="text" placeholder="Search for a city or state"
             class="py-2 px-1 w-full bg-transparent border-b focus:outline-none
              focus:border-gray-500 focus:shadow-[0px_1px_0_0_#004E71]"
              v-model="searchQuery"
              @input="getData">
         </div>
-        <ul class="absolute bg-gray-500 text-white w-full 
-        py-2 px-1 shadow-md top-[66px]"
+        <ul class="block  bg-gray-500 text-white w-full 
+        py-2 px-1 shadow-md top-[66px] mt-0"
         v-if="results">
-            <p v-if="error_v">
-                Sorry, something went wrong with the data from the Api
+            <p v-if="error_v || results.length === 0 ">
+                Sorry,no result found using this query or error with the api
             </p>
-            <p v-if="error_v=false && results.length === 0 ">
-                No results match your query, try a different term
-            </p> 
             <template v-else>
                 <li v-for="result in results" :key="result.id"
-                class="py-2 cursor-pointer"
+                class="py-1 cursor-pointer "
                 @click="previewCity(result)">
-                {{ result.place_name }}
+                {{ result.state}},{{ result.city}} city
                 
                 </li>
             </template>
@@ -39,7 +36,7 @@ import {useRouter} from "vue-router";
                 searchQuery:"",
                 queryTimeout: null,
                 apiKey:"",
-                results:"",
+                results:null,
                 error_v : false,
             }
         },
@@ -50,11 +47,11 @@ import {useRouter} from "vue-router";
                 if(this.searchQuery != ""){
                     try{
                         const info = this.searchQuery;
-                        await axios.get('api/search/${info}')
+                        await axios.get('api/search/'+info)
                         .then((response)=>{
-                        //this.results = response.data.data;
-                        console.log(response);
-                        return;
+                        this.results = response.data.data;
+                        console.log(response.data.data);
+                        return this.results;
                         });
                     }catch(error){
                         this.error_v = true;
