@@ -64,16 +64,26 @@ import {useRouter} from "vue-router";
                 },300);
             },
             previewCity(result){
-                //console.log(result);///this will log the result from the api..when clicked from the li tag
-                const [city , state] = result.place_name.split(",");
-                //console.log(city,state);//to check if the values are gotten from the array
-                useRouter().push({
+                console.log(result);///this will log the result from the api..when clicked from the li tag
+                const city= result.city; 
+                const state = result.state;
+                console.log(city,state);//to check if the values are gotten from the array
+                this.$router.push({
+                    name: 'cityView',
+                    params:{
+                        state: state,
+                        city:city,
+                    },
+                })
+                /*useRouter().push({
                     name:cityView,
                     params:{state:state, city: city},//setting the params from the url to value gotten from result
                     query:{
-                        lat: '',
-                    }
-                })
+                        lat: result.lat,
+                        long: result.long
+                    },
+                    preview: true
+                })*/
             }
             
         },    

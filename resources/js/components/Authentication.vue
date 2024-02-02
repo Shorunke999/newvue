@@ -60,7 +60,7 @@ import {useRouter} from "vue-router";
                             .then(response=>{
                                 console.log(response.data.msg);
                                 useRouter().push({
-                                name:nav,
+                                name:'nav',
                                 });
                                 //route to another page e.g dashboard
                             });
