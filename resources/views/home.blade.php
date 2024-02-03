@@ -13,7 +13,7 @@
 </head>
 <body>
     <div id="App" class="flex flex-col bg-gray-500" >
-        <App-root></App-root>
+        <app-root></app-root>
     </div>
 </body>
 </html>

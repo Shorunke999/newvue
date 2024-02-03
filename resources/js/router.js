@@ -1,18 +1,32 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import navComponent from './components/navComponent.vue';
+import container from './components/container.vue';
 import cityView from './components/cityView.vue';
+import navComponent from "./components/navComponent.vue";
+import Authentication from "./components/Authentication.vue"
+
 const router = createRouter({
-    history:createWebHistory(import.meta.env.BASE_URL),
-    routes:[{
-        path:"/",
-        name:"nav",
-        component: navComponent,
+  history: createWebHistory(),
+  routes: [
+    {
+      path: "/:user",
+      name: "maincomp",
+      component: container,
     },
     {
-        path:"/weather/:state/:city",
-        name:"cityView",
-        component: cityView,
+      path: "/weather/:state/:city",
+      name: "cityView",
+      component: cityView,
+    },
+    {
+      path: "/nav",
+      name: 'nav',
+      component: navComponent,
+    },
+    {
+      path:"/",
+      component: Authentication,
     }
-]
+  ]
 });
-export default router
+
+export default router;

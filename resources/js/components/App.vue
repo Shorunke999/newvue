@@ -1,20 +1,14 @@
-<template>
+<template class="block bg-gray-500">
     <div class="">
-        <navComponent/>
-        <HomeView />
-        <!--<Authentication />-->
+        <router-view/>
     </div>
   
 </template>
 <script>
-import navComponent from '@/components/navComponent.vue';
-import HomeView from './HomeView.vue';
-import Authentication from './Authentication.vue';
+import Authentication from '@/components/Authentication.vue';
 
 export default {
     components: {
-        navComponent,
-        HomeView,
         Authentication,
     },
 };

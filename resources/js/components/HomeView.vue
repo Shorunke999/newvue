@@ -74,7 +74,11 @@ import {useRouter} from "vue-router";
                         state: state,
                         city:city,
                     },
-                })
+                    query:{
+                        long: result.long,
+                        lat:result.lat
+                    }
+                });
                 /*useRouter().push({
                     name:cityView,
                     params:{state:state, city: city},//setting the params from the url to value gotten from result

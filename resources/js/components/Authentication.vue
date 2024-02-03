@@ -44,7 +44,7 @@ import {useRouter} from "vue-router";
             }
         },
         methods:{
-            submitForm(){
+            async submitForm(){
                 if(this.Password == this.confirmPassword){
                     const data = {
                     email: this.Email,
@@ -53,14 +53,15 @@ import {useRouter} from "vue-router";
                     };
                     try{
                         axios.get('/sanctum/csrf-cookie')
-                        .then(()=>{
-                            console.log('working');
+                        .then(res=>{
+                            console.log(res);
                         });
-                        axios.post('api/register', data)
+                        await axios.post('api/register', data)
                             .then(response=>{
                                 console.log(response.data.msg);
-                                useRouter().push({
-                                name:'nav',
+                                this.$router.push({
+                                name:'maincomp',
+                                params: {user:encodeURIComponent(response.data.msg)},
                                 });
                                 //route to another page e.g dashboard
                             });
