@@ -1,15 +1,15 @@
 <template class="block bg-gray-500">
     <div class="">
         <router-view/>
-    </div>
-  
+    </div> 
 </template>
 <script>
 import Authentication from '@/components/Authentication.vue';
-
+import navComponent from '@/components/navComponent.vue';
 export default {
     components: {
         Authentication,
+        navComponent
     },
 };
 </script>

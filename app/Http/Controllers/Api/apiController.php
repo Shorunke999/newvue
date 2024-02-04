@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\locationModel;
 
+use Illuminate\Support\Facades\Http;
+
 class apiController extends Controller
 {
    public function oneTimeRegister(Request $request){
@@ -30,5 +32,19 @@ class apiController extends Controller
       ->get();
       return response()->json(['data'=>$data]);
    }
-    
+   public function weather(Request $request){
+      try{
+          $response = Http::get('http://api.openweathermap.org/data/2.5/onecall', [
+         'lat' => $request->lat,
+         'lon' => $request->long,
+         //'exclude' => $request->exclude,
+         'appid' => '4c806a0a790e087fc77ffe1bbed25765',
+         ]);
+         return $response->json();
+      }catch(\Exception $e){
+         return $response()->json(['error'=>$e]);
+      }
+     
+      }
+      
 }

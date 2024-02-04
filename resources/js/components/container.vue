@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div >
         <navComponent/>
         <HomeView />
     </div>
@@ -11,6 +11,9 @@ export default {
     components:{
         navComponent,
         HomeView,
-    }
+    },
+    methods: {
+        
+    },
 }
 </script>

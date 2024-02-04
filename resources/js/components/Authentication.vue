@@ -1,8 +1,8 @@
 <template>
-    <div class="container flex items-center justify-center bg-gray-500 text-white ">
+    <div class="container flex items-center justify-center text-white ">
         <div class="items-center justify-center bg-">
             <form id="form" class="p-20 text-black" @submit.prevent="submitForm">
-                <div class="mb-4">
+                <div class="mb-4 rounded-xl ">
                     <label class="block">Name</label>
                     <input type="text" placeholder="Input Name" v-model="Name" name="Name"/>
                 </div>
@@ -32,7 +32,6 @@
 
 <script>
 import axios from 'axios';
-import {useRouter} from "vue-router";
     export default {
         data(){
             return{
@@ -60,7 +59,7 @@ import {useRouter} from "vue-router";
                             .then(response=>{
                                 console.log(response.data.msg);
                                 this.$router.push({
-                                name:'maincomp',
+                                name:'container',
                                 params: {user:encodeURIComponent(response.data.msg)},
                                 });
                                 //route to another page e.g dashboard

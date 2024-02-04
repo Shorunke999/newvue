@@ -7,7 +7,7 @@
              v-model="searchQuery"
              @input="getData">
         </div>
-        <ul class="block  bg-gray-500 text-white w-full 
+        <ul class="block text-white w-full 
         py-2 px-1 shadow-md top-[66px] mt-0"
         v-if="results">
             <p v-if="error_v || results.length === 0 ">
@@ -42,7 +42,7 @@ import {useRouter} from "vue-router";
         },
         methods: {
             //fetch data from endpoint 
-            getData(){
+            async getData(){
                 this.queryTimeout = setTimeout(async()=>{
                 if(this.searchQuery != ""){
                     try{
@@ -76,7 +76,7 @@ import {useRouter} from "vue-router";
                     },
                     query:{
                         long: result.long,
-                        lat:result.lat
+                        lat:  result.lat
                     }
                 });
                 /*useRouter().push({

@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
          \App\Models\locationModel::factory()->create([
                'state' => 'lagos',
                'city' => 'lagos',
-               'long'=>'120',
-               'lat'=>'130',
+               'long'=>116,
+               'lat'=>90,
          ]);
     }
 }
