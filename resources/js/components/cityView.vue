@@ -1,24 +1,27 @@
 <template>
-    <div class="flex flex-col flex-1 justify-center items-center bg-gray-500">
-        <div v-if="loading=false" class="text-white p-0">
-            <p> The {{ route.params.city }} weather forecast is{{ route.query.long }}</p>
-            <!--our api is used to design lot of things here
-                following the youtube tutoria..there more data usage and design here
-                go to video #8-->
+    <div>
+        <navComponent />
+         <div class="flex flex-col flex-1 justify-center items-center bg-gray-500">
+            <div v-if="loading===false" class="text-white p-0 cursor-pointer" @click="visibleData">
+                <p> The {{ route.params.city }} weather forecast is{{ route.query.long }}</p>
+                <!--our api is used to design lot of things here
+                    following the youtube tutoria..there more data usage and design here
+                    go to video #8-->
+            </div>
+            <div v-if="loading" class="text-white cursor-pointer" @click="visibleData" >
+            loading data...
+            </div>    
         </div>
-        <div v-if="loading" class="text-white" @click="visibleData">
-        loading data...
-        </div>
-        
     </div>
+   
 </template>
 
 <script>
-//import axios from 'axios';
+import axios from 'axios';
 import { useRoute } from 'vue-router';
-//import navComponent from '@/components/navComponent.vue';
+import navComponent from './navComponent.vue';
     export default {
-        //components: navComponent,
+  components: { navComponent },
         data(){
             return{
               route: useRoute(),
@@ -30,22 +33,17 @@ import { useRoute } from 'vue-router';
             visibleData(){
                 this.loading =!this.loading;
             },
-            getWeatherData(){
+            async getWeatherData(){
+                const info ={
+                    long: this.route.query.long,
+                    lat: this.route.query.lat,
+                };
                 try{
-                    /*const response = await axios.get('api/weather',{
-                            long: this.route.query.long,
-                            lat: this.route.query.lat,
-                            //const response = await axios.get(`http://api.openweathermap.org/data/2.5/onecall?lat=${this.route.query.lat}
-                            //&lon=${this.route.query.long}&exclude={part}&appid=4c806a0a790e087fc77ffe1bbed25765`)
-                    })
-                    .then(res=>{
+                    const res = await axios.get('api/weatherUrl', info);
+                        console.log('succesfully send data to api'); 
                         console.log(res);
                         this.weatherData = res.data;
-                        console.log('succesfully send data to api');
                         this.loading = false;
-                    });*/
-                    console.log('for api');
-                    this.weatherData = true;
                 }catch(error){
                     console.log(error);
                 }

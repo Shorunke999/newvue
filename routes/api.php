@@ -20,4 +20,4 @@ Route::middleware('auth:sanctum')->group(function(){
 });
 Route::get('/search/{info}',[apiController::class,'searchLocation'])->name('search');
 Route::post('/register',[apiController::class,'oneTimeRegister']);
-Route::get('/weather',[apiController::class,'weather']);
+Route::get('/weatherUrl',[apiController::class,'weather']);
