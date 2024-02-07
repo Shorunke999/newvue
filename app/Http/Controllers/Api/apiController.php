@@ -33,17 +33,19 @@ class apiController extends Controller
       return response()->json(['data'=>$data]);
    }
    public function weather(Request $request){ 
-      $url = 'https://api.openweathermap.org/data/2.5/
-         onecall?lat='.$request->lat.'&lon='
-         .$request->long.'&exclude={part}&appid=
-         87b98b360827e3372440f03e31566ce5';
+
+      $url = 'https://api.openweathermap.org/data/2.5/onecall?lat='.$request->lat.'&lon='.$request->long.'&appid=62ef95b4c51cdb61bbc3590da77e1cf2';
+      //    dd($url);
+      // $url='https://api.openweathermap.org/data/2.5/onecall?lat=100&lon=-60&appid=87b98b360827e3372440f03e31566ce5';
+      //    // dd($url);
       try{
           $response = Http::get($url);
+      //comfig('setcre.')
          return $response->json();
      }catch(\Exception $e){
          return response()->json(['error'=>$e->getMessage()],500);
       }
      
-      }
+   }
       
 }

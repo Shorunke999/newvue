@@ -14,6 +14,9 @@
                 <i class="fa-solid fa-plus text-xl 
                 hover:text-pretty cursor-pointer"
                 @click="addCity"></i>
+                <div v-if="route.params.state &&route.params.city">
+                    <button @click="changeProp">dectecting</button>
+                </div>
             </div>
             <BaseModal :propVariable="propvalue">
                 <h1>hello world</h1>
@@ -33,6 +36,7 @@ export default{
         return{
             propvalue: false,
             location:[],
+            route: useRoute(),
         }
     },
     methods: {
@@ -40,11 +44,11 @@ export default{
             this.propvalue =!this.propvalue;
         },
         addCity(){
-            //checl storage to see if data is stored
-            /*if(localStorage.getItem('location')){
-                this.location.value = JSON.parse(localStorage.getItem('location'));
-            }*/
-             const locationObj = {
+            const locationData = localStorage.getItem('location');
+            console.log(locationData);
+            if(locationData){
+                console.log('working');
+                const locationObj = {
                     uid: uid(),
                     state: useRoute().params.state,
                     city: useRoute().params.city,
@@ -52,11 +56,14 @@ export default{
                         lat: useRoute().query.lat,
                         long: useRoute().query.long,
                     }
-
                 };
-            const locationValue = this.location.value.push(locationObj);//we can save as many pof location object in the location array
-            localStorage.setItem('location',JSON.stringify(locationValue));//the array is then stored in the local storage 
+                const locationValue = locationData.push(locationObj);
+                localStorage.setItem('location',JSON.stringify(locationValue));
+                console.log(locationValue);     
+            }
+              
         }
+
     },
 }
 </script>

@@ -1,6 +1,5 @@
 <template>
-    <div class="container flex items-center justify-center text-white ">
-        <div class="items-center justify-center bg-">
+        <div>
             <form id="form" class="p-20 text-black" @submit.prevent="submitForm">
                 <div class="mb-4 rounded-xl ">
                     <label class="block">Name</label>
@@ -19,14 +18,12 @@
                     <input type="text" placeholder="Confirm Password" v-model="confirmPassword" name="v_Password"/>
                 </div>
                 <div class="">
-                    <button type="submit" class="mx-10 bg-amber-600 rounded-sm">Submit form</button>
+                    <button type="submit" class="mx-10 bg-amber-600 rounded-lg">Submit form</button>
                 </div>
                 <div v-if="invalidPassword != ''" class="">
                     {{ invalidPassword }}
                 </div>
         </form>
-        </div>
-        
     </div>
 </template>
 
@@ -60,7 +57,7 @@ import axios from 'axios';
                                 console.log(response.data.msg);
                                 this.$router.push({
                                 name:'container',
-                                params: {user:encodeURIComponent(response.data.msg)},
+                                params: {},
                                 });
                                 //route to another page e.g dashboard
                             });

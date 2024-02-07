@@ -29,7 +29,7 @@
 
 <script>
 import axios  from 'axios'
-import {useRouter} from "vue-router";
+//import {useRouter} from "vue-router";
     export default {
         data(){
             return{
@@ -42,12 +42,12 @@ import {useRouter} from "vue-router";
         },
         methods: {
             //fetch data from endpoint 
-            async getData(){
-                this.queryTimeout = setTimeout(async()=>{
+            getData(){
+                this.queryTimeout = setTimeout(()=>{
                 if(this.searchQuery != ""){
                     try{
                         const info = this.searchQuery;
-                        await axios.get('api/search/'+info)
+                        axios.get('api/search/'+info)
                         .then((response)=>{
                         this.results = response.data.data;
                         console.log(response.data.data);
@@ -64,7 +64,7 @@ import {useRouter} from "vue-router";
                 },300);
             },
             previewCity(result){
-                console.log(result);///this will log the result from the api..when clicked from the li tag
+                console.log(result);//this will log the result from the api..when clicked from the li tag
                 const city= result.city; 
                 const state = result.state;
                 console.log(city,state);//to check if the values are gotten from the array
@@ -79,15 +79,6 @@ import {useRouter} from "vue-router";
                         lat:  result.lat
                     }
                 });
-                /*useRouter().push({
-                    name:cityView,
-                    params:{state:state, city: city},//setting the params from the url to value gotten from result
-                    query:{
-                        lat: result.lat,
-                        long: result.long
-                    },
-                    preview: true
-                })*/
             }
             
         },    
